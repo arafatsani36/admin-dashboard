@@ -54,6 +54,7 @@ interface LiProps{
     text: string;
     location: Location;
     Icon: IconType;
+    
 }
 
 const Li = ({url, text, location, Icon} : LiProps) => (

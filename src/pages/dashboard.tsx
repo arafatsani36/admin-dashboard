@@ -3,6 +3,8 @@ import AdminSidebar from "../component/adminsidebar";
 import { FaRegBell } from "react-icons/fa";
 import userImage from "../assets/user-image.webp"
 import { HiTrendingDown, HiTrendingUp } from "react-icons/hi";
+import data from '../assets/data.json';
+import { BarChat } from "../component/chats";
 
 const Dashboard = () => {
     return (
@@ -24,7 +26,30 @@ const Dashboard = () => {
                 </section>
 
                 <section className="graphContainer">
-
+                    <div className="revenueChart">
+                        <h2>Revenue & Transaction</h2>
+                        <BarChat 
+                        data_2={[300, 144, 433, 655, 237, 755, 190]} 
+                        data_1={[200, 444, 300, 555, 637, 255, 590]}
+                        title_1="Revenue"
+                        title_2="Transaction"
+                        bgColor_1="rgb(0, 155, 255)"
+                        bgColor_2="rgba(53, 162, 235, 0.8)"
+                        
+                        />
+                    </div>
+                    <div className="dashboardCategory">
+                        <h2>Inventory</h2>
+                        <div>
+                            {
+                                data.categories.map(item => (
+                                    <CategoryItem key={item.heading} heading={item.heading} color={`hsl(${item.value * 4},${item.value}%,50%)`} value={item.value}/>
+                                ))
+                            }
+                            
+                            
+                        </div>
+                    </div>
                 </section>
             </main>
         </div>
@@ -61,5 +86,27 @@ const WidgetItem = ({heading, value, percent, color, amount} : WidgetItemProps) 
         }} >{percent}%</span>
     </div>
 </article>)
+
+interface CategoryItemProps{
+    color: string;
+    value: number;
+    heading: string;
+
+} 
+ const CategoryItem = ({color, value, heading}: CategoryItemProps) => 
+ <div className="categoryItem">
+    <h5>{heading}</h5>
+    <div>
+        <div style={
+            {
+                backgroundColor: color,
+                width: `${value}%`
+            }
+        }></div>
+    </div>
+    <span>{value}%</span>
+    
+ </div>
+ 
 
 export default Dashboard;
