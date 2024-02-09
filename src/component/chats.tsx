@@ -8,8 +8,9 @@ import {
   Legend,
   ChartData,
   ChartOptions,
+  ArcElement,
 } from 'chart.js';
-import { Bar } from 'react-chartjs-2';
+import { Bar, Doughnut } from 'react-chartjs-2';
 
 ChartJS.register(
   CategoryScale,
@@ -17,7 +18,8 @@ ChartJS.register(
   BarElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  ArcElement
 );
 
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
@@ -89,13 +91,48 @@ export const BarChat = ({horizontal = false, data_1 = [], data_2 = [], title_1, 
       };
 
 
-
-
-
-
-
-
-
-
   return <Bar options={options} data={data} />;
+}
+
+
+interface dougHnutChartProps{
+  labels: string[];
+  data: number[];
+  backgroundColor: string[];
+  cutout?: number | string;
+  legends?: boolean;
+  offset?: number[]; 
+}
+
+
+
+export const DougHnutChart = ({labels, data, backgroundColor, cutout, legends = true, offset}: dougHnutChartProps) => {
+
+  const dougHnutData: ChartData<"doughnut", number[], string> = {
+    labels,
+    datasets: [{
+      data,
+      backgroundColor,
+      borderWidth:0,
+      offset
+    },
+  ],
+
+  };
+
+  const dougHnutOptions: ChartOptions<"doughnut"> = {
+    responsive: true,
+    plugins:{
+      legend:{
+        display: legends,
+        position: "bottom",
+        labels:{
+          padding:40,
+        },
+      },
+    },
+    cutout,
+  };
+
+  return <Doughnut data={dougHnutData} options={dougHnutOptions}/>
 }

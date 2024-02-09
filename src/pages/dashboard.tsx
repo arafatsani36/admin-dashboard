@@ -4,7 +4,9 @@ import { FaRegBell } from "react-icons/fa";
 import userImage from "../assets/user-image.webp"
 import { HiTrendingDown, HiTrendingUp } from "react-icons/hi";
 import data from '../assets/data.json';
-import { BarChat } from "../component/chats";
+import { BarChat, DougHnutChart } from "../component/chats";
+import { BiMaleFemale } from "react-icons/bi";
+import DashboardTable from "../component/dashboardTable";
 
 const Dashboard = () => {
     return (
@@ -18,13 +20,16 @@ const Dashboard = () => {
                     <img src={userImage} alt="User image" />
                 </div>
 
+                {/* widget section start */}
                 <section className="widgetContainer">
                    <WidgetItem heading="Revenue" value={200} percent={-10} color="rgb(100, 149, 237 )" amount={true}/>
                    <WidgetItem heading="User" value={400} percent={50} color="rgb(20, 151, 16  )" amount={true}/>
                    <WidgetItem heading="Transaction" value={50000} percent={80} color="rgb(255, 195, 0)" amount={true}/>
                    <WidgetItem heading="Products" value={2000} percent={60} color="rgb(176, 22, 34)" amount={true}/>
                 </section>
+                {/* widget section end*/}
 
+                {/* graph section start */}
                 <section className="graphContainer">
                     <div className="revenueChart">
                         <h2>Revenue & Transaction</h2>
@@ -35,7 +40,6 @@ const Dashboard = () => {
                         title_2="Transaction"
                         bgColor_1="rgb(0, 155, 255)"
                         bgColor_2="rgba(53, 162, 235, 0.8)"
-                        
                         />
                     </div>
                     <div className="dashboardCategory">
@@ -51,6 +55,29 @@ const Dashboard = () => {
                         </div>
                     </div>
                 </section>
+                {/* graph section end */}
+                
+                {/* Transaction section start  */}
+                <section className="transactionContainer">
+                    {/* genderChart start */}
+                    <div className="genderChart">
+                        <h2>Gender Ratio</h2>
+                        <p><BiMaleFemale/></p>
+                        {/* chart start */}
+                        <DougHnutChart labels={["Female", "male"]} data={[12, 19]} backgroundColor={["hsl(340, 82%, 56%)", "rgba(53, 162, 235, 0.8)"]} cutout={90}/>
+
+                        {/* chart end */}
+                    </div>
+                    {/* genderChart end */}
+
+                    {/* table start */}
+                        <DashboardTable data={data.transaction}/>
+                    {/* table end */}
+                </section>
+                {/* Transaction section end  */}
+
+
+
             </main>
         </div>
     );   
