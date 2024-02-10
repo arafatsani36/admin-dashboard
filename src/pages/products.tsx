@@ -41,24 +41,69 @@ const img1 = "https://www.google.com/imgres?imgurl=https%3A%2F%2Fcontents.mediad
 
 const arr:DataType[] = [
     {
-        photo: <img src="img1"/>,
+        photo: <img src={img1}/>,
         name: "MEN'S RUNNING SHOES JOGFLOW",
         price:5000,
         stock:5,
         action:<Link to="/admin/products"><button>Manage</button></Link>
     },
     {
-        photo: <img src="img1"/>,
+        photo: <img src={img1}/>,
+        name: "MEN'S RUNNING SHOES",
+        price:10000,
+        stock:10,
+        action:<Link to="/admin/products"><button>Manage</button></Link>
+    },
+
+    {
+        photo: <img src={img1}/>,
         name: "MEN'S RUNNING SHOES JOGFLOW",
         price:5000,
         stock:5,
+        action:<Link to="/admin/products"><button>Manage</button></Link>
+    },
+    {
+        photo: <img src={img1}/>,
+        name: "MEN'S RUNNING SHOES",
+        price:10000,
+        stock:10,
+        action:<Link to="/admin/products"><button>Manage</button></Link>
+    },
+
+    {
+        photo: <img src={img1}/>,
+        name: "MEN'S RUNNING SHOES JOGFLOW",
+        price:5000,
+        stock:5,
+        action:<Link to="/admin/products"><button>Manage</button></Link>
+    },
+    {
+        photo: <img src={img1}/>,
+        name: "MEN'S RUNNING SHOES",
+        price:10000,
+        stock:10,
+        action:<Link to="/admin/products"><button>Manage</button></Link>
+    },
+
+    {
+        photo: <img src={img1}/>,
+        name: "MEN'S RUNNING SHOES JOGFLOW",
+        price:5000,
+        stock:5,
+        action:<Link to="/admin/products"><button>Manage</button></Link>
+    },
+    {
+        photo: <img src={img1}/>,
+        name: "MEN'S RUNNING SHOES",
+        price:10000,
+        stock:10,
         action:<Link to="/admin/products"><button>Manage</button></Link>
     },
 ]
 const Products = () => {
     const [data] = useState<DataType[]>(arr)
     const table = useCallback(
-        TableHOC<DataType>(columns, data, "dasBoardProductsBox", "Products")
+        TableHOC<DataType>(columns, data, "dasBoardProductsBox", "Products", true)
         ,[]
         );
     return (
