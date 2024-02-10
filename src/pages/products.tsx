@@ -45,7 +45,7 @@ const arr:DataType[] = [
         name: "MEN'S RUNNING SHOES JOGFLOW",
         price:5000,
         stock:5,
-        action:<Link to="/admin/products"><button>Manage</button></Link>
+        action:<Link to='/admin/products/sajknaskd'><button>Manage</button></Link>
     },
     {
         photo: <img src={img1}/>,
