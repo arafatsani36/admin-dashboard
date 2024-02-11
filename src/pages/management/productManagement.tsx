@@ -1,11 +1,20 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import AdminSidebar from "../../component/adminsidebar";
 
+const img = "https://images.unsplash.com/photo-1511556532299-8f662fc26c06?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+
 const ProductManagement = () => {
-    const [name, setName] = useState<string>('');
-    const [price, setPrice] = useState<number>();
-    const [stock, setStock] = useState<number>();
-    const [photo, setPhoto] = useState<string>();
+    const [name, setName] = useState<string>('Puma Shoes');
+    const [price, setPrice] = useState<number>(1000);
+    const [stock, setStock] = useState<number>(10);
+    const [photo, setPhoto] = useState<string>(img);
+
+
+    const [nameUpdate, setNameUpdate] = useState<string>(name);
+    const [priceUpdate, setPriceUpdate] = useState<number>(price);
+    const [stockUpdate, setStockUpdate] = useState<number>(stock);
+    const [photoUpdate, setPhotoUpdate] = useState<string>(photo);
+
 
     const changeImageHandler = (e: ChangeEvent<HTMLInputElement>) => {
         const file: File | undefined = e.target.files?.[0];
@@ -14,35 +23,52 @@ const ProductManagement = () => {
         if(file){
             reader.readAsDataURL(file);
             reader.onloadend = () => {
-                if(typeof reader.result === "string") setPhoto(reader.result)
+                if(typeof reader.result === "string") setPhotoUpdate(reader.result)
             }
         }
     }
+
+    const submitHandler = (e: FormEvent<HTMLFormElement>) =>{
+        e.preventDefault();
+
+        setName(nameUpdate)
+        setPrice(priceUpdate)
+        setStock(stockUpdate)
+        setPhoto(photoUpdate)
+    }
+
 
     return (
         <div className="adminContainer">
             <AdminSidebar/>
             <main className="productManagement">
                 <section>
-                    <strong>id - dddddddaaaaaaaaaaa</strong>
-                    <img src="" alt="" />
+                    <strong>ID - dddddddaaaaaaaaaaa</strong>
+                    <img src={photoUpdate} alt="product" />
+                    <p>{nameUpdate}</p>
+                    {
+                        stockUpdate > 0? (
+                            <span className="green">{stockUpdate} Available</span>
+                        ): <span className="red">Not Available</span>
+                    }
+                    <h3>${priceUpdate}</h3>
                 </section>
                 <article>
-                    <form>
-                        <h2>New Products</h2>
+                    <form onSubmit={submitHandler}>
+                        <h2>Product Manage</h2>
                         <div>
                             <label>Name</label>
-                            <input required type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)}/>
+                            <input required type="text" placeholder="Name" value={nameUpdate} onChange={(e) => setNameUpdate(e.target.value)}/>
                         </div>
 
                         <div>
                             <label>Price</label>
-                            <input required type="number" placeholder="Price" value={price} onChange={(e) => setPrice(Number(e.target.value))}/>
+                            <input required type="number" placeholder="Price" value={priceUpdate} onChange={(e) => setPriceUpdate(Number(e.target.value))}/>
                         </div>
 
                         <div>
                             <label>Stock</label>
-                            <input required type="number" placeholder="Stock" value={stock} onChange={(e) => setStock(Number(e.target.value))}/>
+                            <input required type="number" placeholder="Stock" value={stockUpdate} onChange={(e) => setStockUpdate(Number(e.target.value))}/>
                         </div>
 
                         <div>
@@ -51,9 +77,9 @@ const ProductManagement = () => {
                         </div>
 
                         {
-                            photo && <img src={photo} alt="new image" />
+                           photoUpdate && <img src={photoUpdate} alt="new image" />
                         }
-                        <button type="submit">Create</button>
+                        <button type="submit">Update</button>
                     </form>
                 </article>
             </main>
