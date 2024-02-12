@@ -44,11 +44,11 @@ export const BarChat = ({horizontal = false, data_1 = [], data_2 = [], title_1, 
         plugins: {
           legend: {
             // position: 'top' as const,
-            display:true,
+             display:true,
           },
           title: {
             display: false,
-            // text: 'Chart.js Bar Chart',
+            //  text: 'Chart.js Bar Chart',
           },
         },
         scales:{
@@ -91,7 +91,7 @@ export const BarChat = ({horizontal = false, data_1 = [], data_2 = [], title_1, 
       };
 
 
-  return <Bar options={options} data={data} />;
+  return <Bar width={horizontal?"200%" : ""} options={options} data={data} />;
 }
 
 
@@ -124,7 +124,7 @@ export const DougHnutChart = ({labels, data, backgroundColor, cutout, legends = 
     responsive: true,
     plugins:{
       legend:{
-        display: legends,
+        // display: legends,
         position: "bottom",
         labels:{
           padding:40,
