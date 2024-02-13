@@ -2,7 +2,6 @@ import AdminSidebar from "../../component/adminsidebar";
 import { BarChat } from "../../component/chats";
 
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'July', 'Agu', 'Sep', 'Oct', 'Nov', 'Dec'];
-// const 
 
 const BarCharts = () => {
     return (
@@ -17,7 +16,7 @@ const BarCharts = () => {
                 </section>
 
                 <section>
-                    <BarChat data_1={[400, 100, 500, 950, 400, 700,600, 50, 710, 379, 1089, 500, 270]} data_2={[]} title_1="products" title_2="" bgColor_1={`hsl(180, 40%, 50%)`} bgColor_2="" horizontal={true} labels={months}/>
+                    <BarChat data_1={[400, 100, 500, 950, 400, 700,600, 50, 710, 379, 1089, 500, 270]} data_2={[]} title_1="products" title_2="" bgColor_1={`hsl(180, 40%, 50%)`} bgColor_2="" horizontal={true} labels={months} />
                     <h2>ORDERS THROUGHOUT THE YEAR</h2>
                 </section>
             </main>
