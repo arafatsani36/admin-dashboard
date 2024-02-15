@@ -1,0 +1,41 @@
+.dashboardAppContainer{
+    background-color: white;
+    padding: 4rem;
+
+    > h1{
+        text-align: center;
+    }
+
+    > section{
+        @include flex(column, center, center, 2rem);
+        height: 100%;
+
+        .stopWatch{
+            > h2{
+                font-size: 2rem;
+                font-weight: 300;
+                text-align: center;
+            }
+
+            > button{
+                padding: 1rem 2rem;
+                border: none;
+                cursor: pointer;
+                margin: 2rem;
+                font-weight: 700;
+                border-radius: 5px;
+                color: white;
+
+                &:first-of-type{
+                    background-color: rgba(0, 98, 255);
+                }
+                &:last-of-type{
+                    background-color: rgba(300, 0, 0);
+                }
+            }
+            
+        }
+
+       
+    }
+}
