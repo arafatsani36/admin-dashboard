@@ -26,4 +26,3 @@ const BarCharts = () => {
 
 export default BarCharts;
 
-// invision, fiverr, modern website
