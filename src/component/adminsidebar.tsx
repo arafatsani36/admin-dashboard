@@ -1,51 +1,84 @@
+import { useEffect, useState } from "react";
 import { IconType } from "react-icons";
 import { AiFillFileText } from "react-icons/ai";
 import { FaChartBar, FaChartLine, FaChartPie, FaGamepad, FaStopwatch } from "react-icons/fa";
-import { IoIosPeople } from "react-icons/io";
-import { RiCoupon3Fill, RiDashboardFill, RiShoppingBag3Fill } from "react-icons/ri";
+
+import {  IoIosPeople, IoMdClose } from "react-icons/io";
+import { RiCoupon3Fill, RiDashboardFill, RiMenu2Line, RiShoppingBag3Fill } from "react-icons/ri";
 import {  Link, Location, useLocation} from "react-router-dom";
 
 const AdminSidebar = () => {
+    const location = useLocation();
+    const [showModel, setShowModel] = useState<boolean>(false);
+    const [isActive, setIsActive] = useState<boolean>(window.innerWidth < 1100);
 
-    const location = useLocation()
+    const resizeHandler = () => {
+        setIsActive(window.innerWidth < 1100)
+    }
+
+    useEffect(() => {
+        window.addEventListener("resize", resizeHandler);
+        return () => {
+            window.removeEventListener("resize", resizeHandler)
+        }
+    },[])
+
     return (
-        <aside>
-            <h2>logo</h2>
+        <>
+        {isActive &&
+            <button id="hamburger" onClick={() => setShowModel(true)}>
+                <RiMenu2Line />
+            </button>
+            
+        }
+          <aside style={isActive ? {
+            width:"20rem",
+            height: "100vh",
+            position: "fixed",
+            top: "0",
+            left:showModel ? "0" : "-20rem",
+            transition: "all 0.5s"
 
-            {/* Dashboard start  */}
-            <div>
-                <h5>Dashboard</h5>
-                <ul>
-                    <Li url="/admin/dashboard" text="Dashboard" location={location} Icon={RiDashboardFill} />
-                    <Li url="/admin/products" text="Products" location={location} Icon={RiShoppingBag3Fill} />
-                    <Li url="/admin/customers" text="Customers" location={location} Icon={AiFillFileText} />
-                    <Li url="/admin/transaction" text="Transaction" location={location} Icon={IoIosPeople} /> 
-                </ul>
-            </div>
-            {/* Dashboard end  */}
+          } :{}}>
+                <h2>logo</h2>
 
-            {/* Charts start  */}
-            <div>
-                <h5>Charts</h5>
-                <ul>
-                    <Li url="/admin/chart/bar" text="Bar" location={location} Icon={FaChartBar} />
-                    <Li url="/admin/chart/pie" text="Pie" location={location} Icon={FaChartPie} />
-                    <Li url="/admin/chart/line" text="Line" location={location} Icon={FaChartLine} />
-                </ul>
-            </div>
-            {/* Charts end */}
+                {isActive && <button id="close" onClick={() => setShowModel(false)}><IoMdClose /></button>}
 
-            {/* Apps start  */}
-            <div>
-                <h5>Apps</h5>
-                <ul>
-                    <Li url="/admin/app/stopwatch" text="stopwatch" location={location} Icon={FaStopwatch} />
-                    <Li url="/admin/app/coupon" text="Coupon" location={location} Icon={RiCoupon3Fill} />
-                    <Li url="/admin/app/toss" text="Toss" location={location} Icon={FaGamepad} />
-                </ul>
-            </div>
-            {/* Apps end */}
-        </aside>
+                {/* Dashboard start  */}
+                <div>
+                    <h5>Dashboard</h5>
+                    <ul>
+                        <Li url="/admin/dashboard" text="Dashboard" location={location} Icon={RiDashboardFill} />
+                        <Li url="/admin/products" text="Products" location={location} Icon={RiShoppingBag3Fill} />
+                        <Li url="/admin/customers" text="Customers" location={location} Icon={AiFillFileText} />
+                        <Li url="/admin/transaction" text="Transaction" location={location} Icon={IoIosPeople} /> 
+                    </ul>
+                </div>
+                {/* Dashboard end  */}
+
+                {/* Charts start  */}
+                <div>
+                    <h5>Charts</h5>
+                    <ul>
+                        <Li url="/admin/chart/bar" text="Bar" location={location} Icon={FaChartBar} />
+                        <Li url="/admin/chart/pie" text="Pie" location={location} Icon={FaChartPie} />
+                        <Li url="/admin/chart/line" text="Line" location={location} Icon={FaChartLine} />
+                    </ul>
+                </div>
+                {/* Charts end */}
+
+                {/* Apps start  */}
+                <div>
+                    <h5>Apps</h5>
+                    <ul>
+                        <Li url="/admin/app/stopwatch" text="stopwatch" location={location} Icon={FaStopwatch} />
+                        <Li url="/admin/app/coupon" text="Coupon" location={location} Icon={RiCoupon3Fill} />
+                        <Li url="/admin/app/toss" text="Toss" location={location} Icon={FaGamepad} />
+                    </ul>
+                </div>
+                {/* Apps end */}
+          </aside>
+        </>
     );
 };
 
